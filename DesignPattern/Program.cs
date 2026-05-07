@@ -14,11 +14,7 @@ namespace DesignPattern
         {
             Console.WriteLine("Hello, World!");
 
-            Calculater.Calculate();
-            //ShopCalculater.Calculate();
-
-            //ProxyPattern.Test();
-            //FactoryMethodPattern.Test();
+            Base.Test.Run(new DesignPattern.策略模式.商场计费工具.StrategyPatternDemo());
         }
     }
 }
