@@ -1,4 +1,5 @@
 ﻿using DesignPattern.Base;
+using DesignPattern.策略模式.商场计费工具.计费策略;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,9 +19,9 @@ namespace DesignPattern.策略模式.商场计费工具
             Order order = new Order();
             order.Commodities.Add(new Commodity() { Name = "商品1", Price = 100 });
             order.Commodities.Add(new Commodity() { Name = "商品2", Price = 200 });
-            order.CalculateTotal(DiscountType.None);
-            order.CalculateTotal(DiscountType.Percentage);
-            order.CalculateTotal(DiscountType.FixedAmount);
+            order.CalculateTotal(new 策略模式.商场计费工具.计费策略.OriginalPriceStrategy());
+            order.CalculateTotal(new 策略模式.商场计费工具.计费策略.DiscountStrategy());
+            order.CalculateTotal(new 策略模式.商场计费工具.计费策略.FullReductionStrategy());
         }
     }
 }

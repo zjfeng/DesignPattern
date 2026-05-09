@@ -1,0 +1,97 @@
+@startuml dd
+' ===== 样式与布局 =====
+title 设计模式
+left to right direction
+
+skinparam class {
+    BackgroundColor White
+    BorderColor Black
+    ArrowColor DarkBlue
+}
+skinparam package {
+    BackgroundColor LightGray
+    BorderColor Gray
+    FontColor Black
+}
+skinparam interface {
+    BackgroundColor PaleGoldenRod
+    BorderColor DarkGoldenRod
+}
+
+
+' ===== 基础包 =====
+package "Base" {
+    abstract class DemoRunner {
+        + {abstract} Description: string
+        + {abstract} Run(): void
+    }
+
+    class Test {
+        + {static} Run(DemoRunner demoRunner): void
+    }
+}
+
+' ===== 策略模式包 =====
+package "策略模式_商城计费" {
+    ' 策略接口
+    interface AccountingStrategy {
+        + Accounting(order: Order): decimal
+    }
+
+    ' 具体策略
+    class OriginalPriceStrategy {
+        + Accounting(order: Order): decimal
+    }
+
+    class DiscountStrategy {
+        + Accounting(order: Order): decimal
+    }
+
+    class FullReductionStrategy {
+        + Accounting(order: Order): decimal
+    }
+
+    ' 订单与商品
+    class Order {
+        - Total: decimal
+        - Commodities: Commodity[]
+        + CalculateTotal(strategy: AccountingStrategy): decimal
+    }
+
+    class Commodity {
+        - Name: string
+        - Price: decimal
+    }
+
+    ' 演示类
+    class StrategyPatternDemo {
+        - Description: string
+        + Run(): void
+    }
+}
+
+' ===== 关系定义 =====
+' 聚合关系
+Order "1" o-- "n" Commodity : 包含 >
+' 关联端角色（可选，用于明确双向关系）
+Order : +Commodities
+Commodity : -Order
+
+' 策略接口实现
+AccountingStrategy <|.. OriginalPriceStrategy
+AccountingStrategy <|.. DiscountStrategy
+AccountingStrategy <|.. FullReductionStrategy
+
+' 继承与依赖
+StrategyPatternDemo --|> DemoRunner
+StrategyPatternDemo ..> Order : 创建
+Order ..> AccountingStrategy : 调用
+
+' 静态方法的依赖
+Test ..> DemoRunner
+
+' ===== 说明注释 =====
+note right of StrategyPatternDemo
+    演示策略模式在商城计费中的应用。
+end note
+@enduml
