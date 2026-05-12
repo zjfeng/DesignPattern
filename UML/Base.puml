@@ -31,31 +31,76 @@ package "Base" {
     }
 }
 
+' 静态方法的依赖
+Test ..> DemoRunner
+
 ' ===== 策略模式包 =====
 package "策略模式_商城计费" {
     ' 策略接口
-    interface AccountingStrategy {
-        + Accounting(order: Order): decimal
+    enum MembershipGrade
+    { 
+        none,
+        silver,
+        gold,
+        platinum
+    }
+
+    interface IAccountingStrategy {
+        + IsApplicable(): bool
+        + Calculate(orderFee: decimal): decimal
     }
 
     ' 具体策略
     class OriginalPriceStrategy {
-        + Accounting(order: Order): decimal
+        + IsApplicable(): bool
+        + Calculate(orderFee: decimal): decimal
     }
 
     class DiscountStrategy {
-        + Accounting(order: Order): decimal
+        - _discountRate: decimal
+        _ grade: MembershipGrade
+        + IsApplicable(): bool
+        + DiscountStrategy(membershipGrade: MembershipGrade)
+        + Calculate(orderFee: decimal): decimal
     }
 
     class FullReductionStrategy {
-        + Accounting(order: Order): decimal
+        - fullReductionAmount: decimal
+        - fullReductionFactor: decimal
+        + IsApplicable(): bool
+        + FullReductionStrategy(amount: decimal, factor: decimal)
+        + Calculate(orderFee: decimal): decimal
+    }
+
+    class CouponStrategy {
+        - couponAmount: decimal
+        + IsApplicable(): bool
+        + CouponStrategy(couponAmount: decimal)
+        + Calculate(orderFee: decimal): decimal
+    }
+
+    class CombinedStrategy {
+        - strategies: IList<IAccountingStrategy>
+        + IsApplicable(): bool
+        + CombinedStrategy(strategies: IList<IAccountingStrategy>)
+        + Calculate(orderFee: decimal): decimal
+    }
+
+    class TimeDiscountStrategy {
+        - discountTimeStart: integer
+        - discountTimeEnd: integer
+        - discountRate: decimal
+        - membershipGrade: MembershipGrade
+        + IsApplicable(): bool
+        + TimeDiscountStrategy(grade: MembershipGrade, startHour: integer, endHour: integer, discountRate: decimal)
+        + Calculate(orderFee: decimal): decimal
     }
 
     ' 订单与商品
     class Order {
         - Total: decimal
-        - Commodities: Commodity[]
-        + CalculateTotal(strategy: AccountingStrategy): decimal
+        - Commodities: IList<Commodity>
+        + CalculateTotal(strategy: IAccountingStrategy): decimal
     }
 
     class Commodity {
@@ -68,9 +113,14 @@ package "策略模式_商城计费" {
         - Description: string
         + Run(): void
     }
+
+    ' 工厂类
+    class AccountingStrategyFactory {
+        + CreateStrategy(orderFee: decimal, membershipGrade: MembershipGrade, couponAmount: decimal): IAccountingStrategy
+    }
 }
 
-' ===== 关系定义 =====
+' ===== 策略模式关系定义 =====
 ' 聚合关系
 Order "1" o-- "n" Commodity : 包含 >
 ' 关联端角色（可选，用于明确双向关系）
@@ -78,20 +128,30 @@ Order : +Commodities
 Commodity : -Order
 
 ' 策略接口实现
-AccountingStrategy <|.. OriginalPriceStrategy
-AccountingStrategy <|.. DiscountStrategy
-AccountingStrategy <|.. FullReductionStrategy
+IAccountingStrategy <|.. OriginalPriceStrategy
+IAccountingStrategy <|.. DiscountStrategy
+IAccountingStrategy <|.. FullReductionStrategy
+IAccountingStrategy <|.. CouponStrategy
+IAccountingStrategy <|.. CombinedStrategy
+IAccountingStrategy <|.. TimeDiscountStrategy
 
 ' 继承与依赖
 StrategyPatternDemo --|> DemoRunner
 StrategyPatternDemo ..> Order : 创建
-Order ..> AccountingStrategy : 调用
-
-' 静态方法的依赖
-Test ..> DemoRunner
+StrategyPatternDemo ..> AccountingStrategyFactory : 调用
+AccountingStrategyFactory ..> IAccountingStrategy : 创建
+DiscountStrategy ..> MembershipGrade : 依赖
+TimeDiscountStrategy ..> MembershipGrade : 依赖
+AccountingStrategyFactory ..> MembershipGrade : 依赖
 
 ' ===== 说明注释 =====
 note right of StrategyPatternDemo
     演示策略模式在商城计费中的应用。
 end note
+
+
+
+
+
+
 @enduml

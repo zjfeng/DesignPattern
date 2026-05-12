@@ -14,18 +14,11 @@ namespace DesignPattern.策略模式.商场计费工具
 
         public decimal CalculateTotal(IAccountingStrategy strategy)
         {
-            Total = strategy.Accounting(this);
+            Total = strategy.Calculate(this.Commodities.Sum(s => s.Price));
 
             Console.WriteLine("订单总价为：" + Total);
 
             return Total;
         }
-    }
-
-    enum DiscountType
-    {
-        None,
-        Percentage,
-        FixedAmount
     }
 }

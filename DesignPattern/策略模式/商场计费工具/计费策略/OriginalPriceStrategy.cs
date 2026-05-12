@@ -13,9 +13,12 @@ namespace DesignPattern.策略模式.商场计费工具.计费策略
         /// </summary>
         /// <param name="order"></param>
         /// <returns></returns>
-        public decimal Accounting(Order order)
+        public decimal Calculate(decimal orderFee)
         {
-            return order.Commodities.Sum(x => x.Price);
+            Console.WriteLine("调用原价策略，订单总价为：" + orderFee);
+            return orderFee;
         }
+
+        public bool IsApplicable() => true;
     }
 }

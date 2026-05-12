@@ -8,6 +8,7 @@ namespace DesignPattern.策略模式.商场计费工具.计费策略
 {
     internal interface IAccountingStrategy
     {
-        public decimal Accounting(Order order);
+        public bool IsApplicable();
+        public decimal Calculate(decimal orderFee);
     }
 }

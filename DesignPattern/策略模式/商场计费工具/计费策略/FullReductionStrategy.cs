@@ -8,19 +8,30 @@ namespace DesignPattern.策略模式.商场计费工具.计费策略
 {
     internal class FullReductionStrategy : IAccountingStrategy
     {
+        private decimal fullReductionAmount;
+        private decimal fullReductionFactor;
+
+        public FullReductionStrategy(decimal amount, decimal factor) 
+        {
+            fullReductionAmount = amount;
+            fullReductionFactor = factor;
+        }
+
         /// <summary>
         /// 满减
         /// </summary>
-        /// <param name="order"></param>
+        /// <param name="orderFee"></param>
         /// <returns></returns>
-        public decimal Accounting(Order order)
+        public decimal Calculate(decimal orderFee)
         {
-            decimal total = order.Commodities.Sum(x => x.Price);
-            if (total >= 300)
+            if (orderFee >= fullReductionAmount)
             {
-                total -= 50;
+                Console.WriteLine("调用满减策略，满" + fullReductionAmount + "减" + fullReductionFactor);
+                orderFee -= fullReductionFactor;
             }
-            return total;
+            return orderFee;
         }
+
+        public bool IsApplicable() => 0 < fullReductionAmount && fullReductionFactor > 0;
     }
 }
