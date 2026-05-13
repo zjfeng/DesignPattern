@@ -1,0 +1,32 @@
+@startuml 装饰器模式
+title 装饰器模式
+
+' ==== 饮料
+abstract class Beverage {
+    + Seasonings: List<seasoning>
+    + GetDescription(): string
+    + {abstract} GetSeasoningsDescription(): string
+    + Cost(): decimal
+    + {abstract} GetSeasoningsCost(): decimal
+    + AddSeasoning(): void
+}
+
+class HouseBlend extends Beverage {}
+
+class DarkRoast extends Beverage {}
+
+' ==== 调料
+abstract class seasoning {
+    + {abstract} GetDescription(): string
+    + {abstract} Cost(): decimal
+}
+
+class SteamedMilk extends seasoning {}
+class Mocha extends seasoning {}
+class Soy extends seasoning {}
+class Whip extends seasoning {}
+
+' ==== 关系
+Beverage --> seasoning : "被装饰"
+
+@enduml

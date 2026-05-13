@@ -1,12 +1,4 @@
-﻿using DesignPattern.代理模式;
-using DesignPattern.初入设计模式;
-using DesignPattern.工厂方法模式;
-using DesignPattern.策略模式.商场计费工具;
-using DesignPattern.装饰者模式;
-using DesignPattern.装饰者模式.QQ秀;
-using DesignPattern.观察者模式;
-
-namespace DesignPattern
+﻿namespace DesignPattern
 {
     internal class Program
     {
@@ -14,7 +6,8 @@ namespace DesignPattern
         {
             Console.WriteLine("Hello, World!");
 
-            Base.Test.Run(new DesignPattern.策略模式.商场计费工具.StrategyPatternDemo());
+            //Base.Test.Run(new DesignPattern.策略模式.商场计费工具.StrategyPatternDemo());
+            Base.Test.Run(new DesignPattern.装饰器模式.咖啡店.DecoratorPatternDemo());
         }
     }
 }

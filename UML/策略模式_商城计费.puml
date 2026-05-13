@@ -24,6 +24,7 @@ package "Base" {
     abstract class DemoRunner {
         + {abstract} Description: string
         + {abstract} Run(): void
+        + {abstract} Excute(): void
     }
 
     class Test {
@@ -109,10 +110,7 @@ package "策略模式_商城计费" {
     }
 
     ' 演示类
-    class StrategyPatternDemo {
-        - Description: string
-        + Run(): void
-    }
+    class StrategyPatternDemo {}
 
     ' 工厂类
     class AccountingStrategyFactory {
@@ -148,10 +146,5 @@ AccountingStrategyFactory ..> MembershipGrade : 依赖
 note right of StrategyPatternDemo
     演示策略模式在商城计费中的应用。
 end note
-
-
-
-
-
 
 @enduml

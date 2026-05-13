@@ -11,12 +11,10 @@ namespace DesignPattern.策略模式.商场计费工具
 {
     internal class StrategyPatternDemo : DemoRunner
     {
-        public override string Description => "Running Demo: 策略模式.商场计费工具";
+        public override string Description => "策略模式.商场计费工具";
 
-        public override void Run()
+        public override void Excute()
         {
-            Console.WriteLine(Description);
-
             Order order = new Order();
             order.Commodities.Add(new Commodity() { Name = "商品1", Price = 100 });
             order.Commodities.Add(new Commodity() { Name = "商品2", Price = 200 });
