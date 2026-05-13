@@ -8,12 +8,12 @@ namespace DesignPattern.装饰器模式.咖啡店.咖啡
 {
     internal class HouseBlend : Beverage
     {
-        public override decimal Cost()
+        public override decimal GetBeverageCost()
         {
             return 1.99m;
         }
 
-        public override string GetDescription()
+        public override string GetBeverageDescription()
         {
             return "House Blend Coffee，综合咖啡";
         }

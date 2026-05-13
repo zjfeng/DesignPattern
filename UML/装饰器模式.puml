@@ -16,17 +16,17 @@ class HouseBlend extends Beverage {}
 class DarkRoast extends Beverage {}
 
 ' ==== 调料
-abstract class seasoning {
+abstract class Seasoning {
     + {abstract} GetDescription(): string
     + {abstract} Cost(): decimal
 }
 
-class SteamedMilk extends seasoning {}
-class Mocha extends seasoning {}
-class Soy extends seasoning {}
-class Whip extends seasoning {}
+class SteamedMilk extends Seasoning {}
+class Mocha extends Seasoning {}
+class Soy extends Seasoning {}
+class Whip extends Seasoning {}
 
 ' ==== 关系
-Beverage --> seasoning : "被装饰"
+Beverage --> Seasoning : "被装饰"
 
 @enduml
