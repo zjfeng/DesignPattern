@@ -34,5 +34,6 @@ class Tall extends Size {}
 
 ' ==== 关系
 Seasoning --o Beverage
+Size --o Beverage
 
 @enduml

@@ -1,5 +1,6 @@
 ﻿using DesignPattern.Base;
 using DesignPattern.装饰器模式.咖啡店.咖啡;
+using DesignPattern.装饰器模式.咖啡店.容量;
 using DesignPattern.装饰器模式.咖啡店.调料;
 using System;
 using System.Collections.Generic;
@@ -16,9 +17,7 @@ namespace DesignPattern.装饰器模式.咖啡店
         public override void Excute()
         {
             Beverage darkRoast = new DarkRoast();
-            darkRoast = new Mocha(darkRoast);
-            darkRoast = new Mocha(darkRoast);
-            darkRoast = new Whip(darkRoast);
+            darkRoast = new Venti(new Mocha(new DarkRoast()));
             Console.WriteLine($"{darkRoast.GetDescription()} ${darkRoast.Cost()}");
         }
     }

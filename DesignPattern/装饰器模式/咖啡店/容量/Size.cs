@@ -5,13 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DesignPattern.装饰器模式.咖啡店.调料
+namespace DesignPattern.装饰器模式.咖啡店.容量
 {
-    internal abstract class Seasoning : Beverage
+    internal abstract class Size : Beverage
     {
         protected Beverage beverage;
 
-        public Seasoning(Beverage beverage)
+        public Size(Beverage beverage)
         {
             this.beverage = beverage;
         }
