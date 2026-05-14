@@ -16,9 +16,9 @@ namespace DesignPattern.装饰器模式.咖啡店
         public override void Excute()
         {
             Beverage darkRoast = new DarkRoast();
-            darkRoast.AddSeasoning(new Mocha());
-            darkRoast.AddSeasoning(new Mocha());
-            darkRoast.AddSeasoning(new Whip());
+            darkRoast = new Mocha(darkRoast);
+            darkRoast = new Mocha(darkRoast);
+            darkRoast = new Whip(darkRoast);
             Console.WriteLine($"{darkRoast.GetDescription()} ${darkRoast.Cost()}");
         }
     }

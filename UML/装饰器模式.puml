@@ -3,12 +3,8 @@ title 装饰器模式
 
 ' ==== 饮料
 abstract class Beverage {
-    + Seasonings: List<seasoning>
-    + GetDescription(): string
-    + {abstract} GetSeasoningsDescription(): string
-    + Cost(): decimal
-    + {abstract} GetSeasoningsCost(): decimal
-    + AddSeasoning(): void
+    + {abstract} GetDescription(): string
+    + {abstract} Cost(): decimal
 }
 
 class HouseBlend extends Beverage {}
@@ -16,9 +12,9 @@ class HouseBlend extends Beverage {}
 class DarkRoast extends Beverage {}
 
 ' ==== 调料
-abstract class Seasoning {
-    + {abstract} GetDescription(): string
-    + {abstract} Cost(): decimal
+abstract class Seasoning extends Beverage {
+    - beverage: Beverage
+    + Seasoning(beverage: Beverage)
 }
 
 class SteamedMilk extends Seasoning {}
@@ -26,7 +22,17 @@ class Mocha extends Seasoning {}
 class Soy extends Seasoning {}
 class Whip extends Seasoning {}
 
+' === 容量
+abstract class Size extends Beverage {
+    - beverage: Beverage
+    + Size(beverage: Beverage)
+}
+class Venti extends Size {}
+class Grande extends Size {}
+class Tall extends Size {}
+
+
 ' ==== 关系
-Beverage --> Seasoning : "被装饰"
+Seasoning --o Beverage
 
 @enduml
