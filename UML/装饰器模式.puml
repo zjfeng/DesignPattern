@@ -11,29 +11,52 @@ class HouseBlend extends Beverage {}
 
 class DarkRoast extends Beverage {}
 
-' ==== 调料
-abstract class Seasoning extends Beverage {
+' ==== 装饰
+abstract class CondimentDecorator extends Beverage {
     - beverage: Beverage
-    + Seasoning(beverage: Beverage)
+    + CondimentDecorator(beverage: Beverage)
 }
 
-class SteamedMilk extends Seasoning {}
-class Mocha extends Seasoning {}
-class Soy extends Seasoning {}
-class Whip extends Seasoning {}
+' 调料
+class SteamedMilk extends CondimentDecorator {}
+class Mocha extends CondimentDecorator {}
+class Soy extends CondimentDecorator {}
+class Whip extends CondimentDecorator {}
 
-' === 容量
-abstract class Size extends Beverage {
+' 容量
+class Venti extends CondimentDecorator {}
+class Grande extends CondimentDecorator {}
+class Tall extends CondimentDecorator {}
+
+' ==== 构建类
+class BeverageBuilder {
     - beverage: Beverage
-    + Size(beverage: Beverage)
+    - size: SizeType
+    - seasoningTypes: List<SeasoningType>
+    + SetBaseBeverage(beverage: Beverage): void
+    + SetSize(size: SizeType): void
+    + AddSeasoning(seasoningType: SeasoningType): void
+    + GetBeverage(): Beverage
 }
-class Venti extends Size {}
-class Grande extends Size {}
-class Tall extends Size {}
 
+' ==== 枚举
+enum SizeType {
+    Tall
+    Grande
+    Venti
+}
+enum SeasoningType {
+    SteamedMilk
+    Mocha
+    Soy
+    Whip
+}
 
 ' ==== 关系
-Seasoning --o Beverage
-Size --o Beverage
+CondimentDecorator o-- Beverage
+BeverageBuilder ..> Beverage
+BeverageBuilder ..> CondimentDecorator
+BeverageBuilder ..> SizeType
+BeverageBuilder ..> SeasoningType
 
 @enduml

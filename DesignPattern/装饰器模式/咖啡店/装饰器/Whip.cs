@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DesignPattern.装饰器模式.咖啡店.调料
+namespace DesignPattern.装饰器模式.咖啡店.装饰器
 {
-    internal class Whip : Seasoning
+    internal class Whip : CondimentDecorator
     {
         public Whip(Beverage beverage) : base(beverage)
         {

@@ -5,21 +5,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DesignPattern.装饰器模式.咖啡店.调料
+namespace DesignPattern.装饰器模式.咖啡店.装饰器
 {
-    internal class Soy : Seasoning
+    internal class Mocha : CondimentDecorator
     {
-        public Soy(Beverage beverage) : base(beverage)
+        public Mocha(Beverage beverage) : base(beverage)
         {
         }
 
         public override decimal Cost()
         {
-            return 0.41m + beverage.Cost();
+            return 0.59m + beverage.Cost();
         }
+
         public override string GetDescription()
         {
-            return beverage.GetDescription() + " Soy";
+            return beverage.GetDescription() + " Mocha";
         }
     }
 }

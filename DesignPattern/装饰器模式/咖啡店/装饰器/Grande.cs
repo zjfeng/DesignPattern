@@ -5,22 +5,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DesignPattern.装饰器模式.咖啡店.调料
+namespace DesignPattern.装饰器模式.咖啡店.装饰器
 {
-    internal class Mocha : Seasoning
+    internal class Grande : CondimentDecorator
     {
-        public Mocha(Beverage beverage) : base(beverage)
+        public Grande(Beverage beverage) : base(beverage)
         {
         }
 
         public override decimal Cost()
         {
-            return 0.59m + beverage.Cost();
+            return 0.5m + beverage.Cost();
         }
 
         public override string GetDescription()
         {
-            return beverage.GetDescription() + " Mocha";
+            return beverage.GetDescription() + " Grande Size";
         }
     }
 }

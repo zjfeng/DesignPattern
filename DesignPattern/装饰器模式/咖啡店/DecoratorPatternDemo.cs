@@ -1,12 +1,5 @@
 ﻿using DesignPattern.Base;
 using DesignPattern.装饰器模式.咖啡店.咖啡;
-using DesignPattern.装饰器模式.咖啡店.容量;
-using DesignPattern.装饰器模式.咖啡店.调料;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DesignPattern.装饰器模式.咖啡店
 {
@@ -16,9 +9,13 @@ namespace DesignPattern.装饰器模式.咖啡店
 
         public override void Excute()
         {
-            Beverage darkRoast = new DarkRoast();
-            darkRoast = new Venti(new Mocha(new DarkRoast()));
-            Console.WriteLine($"{darkRoast.GetDescription()} ${darkRoast.Cost()}");
+            BeverageBuilder builder = new BeverageBuilder();
+            builder.SetBeverage(new HouseBlend());
+            builder.AddCondiment(SeasoningType.Mocha);
+            builder.SetSize(SizeType.Grande);
+            builder.AddCondiment(SeasoningType.SteamedMilk);
+            Beverage beverage = builder.Build();
+            Console.WriteLine($"{beverage.GetDescription()} ${beverage.Cost()}");
         }
     }
 }
