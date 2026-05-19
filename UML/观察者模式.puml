@@ -1,0 +1,47 @@
+@@startuml 观察者模式
+title 观察者模式
+
+interface ISubject {
+    + RegisterObserver(observer: IObserver): void
+    + RemoveObserver(observer: IObserver): void
+    + NotifyObservers(): void
+}
+
+class WeatherData implements ISubject {
+    + Temperatures: List<float>
+    + Humidities: List<float>
+    + Pressures: List<float>
+    + Observers: List<IObserver>
+
+    + SetMeasurements(temp: float, humidity: float, pressure: float): void
+    + GetTemperatures(count: int): List<float>
+    + GetHumidities(count: int): List<float>
+    + GetPressures(count: int): List<float>
+}
+
+interface IObserver {
+    + Update(): void
+}
+
+class CurrentConditionsDisplay implements IObserver {
+    + Subject: ISubject
+    + Display(): void
+}
+
+class StatisticsDisplay implements IObserver {
+    + Subject: ISubject
+    + Display(): void
+}
+
+class ForecastDisplay implements IObserver {
+    + Subject: ISubject
+    + Display(): void
+}
+
+' === 关系
+WeatherData "1" o-- "*" IObserver : 注册
+
+CurrentConditionsDisplay --> ISubject : 观察
+StatisticsDisplay --> ISubject : 观察
+ForecastDisplay --> ISubject : 观察
+@@enduml
