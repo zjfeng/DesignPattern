@@ -1,0 +1,37 @@
+@startuml 工厂方法模式
+title 工厂方法模式
+
+' === Pizza ===
+abstract class Pizza {
+    + Prepare(): void
+    + Bake(): void
+    + Cut(): void
+    + Box(): void
+}
+
+class CheesePizza extends Pizza {
+
+}
+class GreekPizza extends Pizza {
+
+}
+
+' === 商店 ===
+
+class PizzaStore {
+    - store: SimplePizzaFactory
+    + PizzaStore(factory: SimplePizzaFactory): void
+    + OrderPizza(type: string): Pizza
+}
+
+' === 简单工厂 ===
+class SimplePizzaFactory {
+    + CreatePizza(type: string): Pizza
+}
+
+' === 关系 ===
+PizzaStore --> SimplePizzaFactory : uses
+SimplePizzaFactory ..> Pizza : creates
+
+
+@enduml
