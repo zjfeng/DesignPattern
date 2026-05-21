@@ -10,17 +10,17 @@ namespace DesignPattern.工厂方法模式.Pizza店.Pizza
     {
         public override void Bake()
         {
-            Console.WriteLine("烘焙");
+            Console.WriteLine("CheesePizza烘焙");
         }
 
         public override void Box()
         {
-            Console.WriteLine("打包");
+            Console.WriteLine("CheesePizza打包");
         }
 
         public override void Cut()
         {
-            Console.WriteLine("切片");
+            Console.WriteLine("CheesePizza切片");
         }
 
         public override void Prepare()

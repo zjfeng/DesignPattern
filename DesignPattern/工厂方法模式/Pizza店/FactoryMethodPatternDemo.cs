@@ -12,7 +12,7 @@ namespace DesignPattern.工厂方法模式.Pizza店
 
         public override void Excute()
         {
-            PizzaStore store = new PizzaStore(new SimplePizzaFactory());
+            PizzaStore store = new NYPizzaStore();
             store.OrderPizza("CheesePizza");
         }
     }

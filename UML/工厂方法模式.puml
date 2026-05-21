@@ -1,12 +1,13 @@
 @startuml 工厂方法模式
 title 工厂方法模式
+left to right direction
 
 ' === Pizza ===
 abstract class Pizza {
-    + Prepare(): void
-    + Bake(): void
-    + Cut(): void
-    + Box(): void
+    + {abstract} Prepare(): void
+    + {abstract} Bake(): void
+    + {abstract} Cut(): void
+    + {abstract} Box(): void
 }
 
 class CheesePizza extends Pizza {
@@ -15,23 +16,35 @@ class CheesePizza extends Pizza {
 class GreekPizza extends Pizza {
 
 }
+class NYCheesePizza extends CheesePizza {
+
+}
+class NYGreekPizza extends GreekPizza {
+
+}
+class ChicagoCheesePizza extends CheesePizza {
+
+}
+class ChicagoGreekPizza extends GreekPizza {
+
+}
 
 ' === 商店 ===
 
-class PizzaStore {
-    - store: SimplePizzaFactory
-    + PizzaStore(factory: SimplePizzaFactory): void
+abstract class PizzaStore {
     + OrderPizza(type: string): Pizza
+    + {abstract} CreatePizza(type: string): Pizza
 }
 
-' === 简单工厂 ===
-class SimplePizzaFactory {
-    + CreatePizza(type: string): Pizza
+class NYPizzaStore extends PizzaStore {
 }
+
+class ChicagoPizzaStore extends PizzaStore {
+}
+
 
 ' === 关系 ===
-PizzaStore --> SimplePizzaFactory : uses
-SimplePizzaFactory ..> Pizza : creates
+PizzaStore ..> Pizza : creates
 
 
 @enduml
