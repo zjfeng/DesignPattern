@@ -1,0 +1,41 @@
+@startuml 观察者模式
+title 观察者模式
+
+class WeatherData {
+    - Observers: List<IObserver>
+
+    + GetTemperature(): float
+    + GetHumidity(): float
+    + GetPressure(): float
+
+    + MeasurementsChanged(): void
+    + Notify(): void
+    + Register(observer: IObserver): void
+    + Remove(observer: IObserver): void
+}
+
+interface IObserver {
+    + Update(): void
+}
+
+class CurrentConditionsDisplay implements IObserver {
+    + WeatherData: WeatherData
+    + Update(): void
+}
+
+class StatisticsDisplay implements IObserver {
+    + WeatherData: WeatherData
+    + Update(): void
+}
+
+class ForecastDisplay implements IObserver {
+    + WeatherData: WeatherData
+    + Update(): void
+}
+
+WeatherData ..> IObserver : has
+CurrentConditionsDisplay --> WeatherData : observes
+StatisticsDisplay --> WeatherData : observes
+ForecastDisplay --> WeatherData : observes
+
+@enduml
