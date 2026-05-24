@@ -2,19 +2,26 @@ namespace DesignPattern.观察者模式2
 {
     public class CurrentConditionsDisplay : IObserver
     {
-        public WeatherData weatherData;
+        public ISubject Subject;
 
-        public CurrentConditionsDisplay(WeatherData weatherData)
+        public CurrentConditionsDisplay(ISubject subject)
         {
-            this.weatherData = weatherData; 
-            weatherData.Register(this);
+            this.Subject = subject; 
+            subject.Register(this);
         }
 
         public void Update()
         {
-            float temperature = weatherData.GetTemperature();
-            float humidity = weatherData.GetHumidity();
-            Display(temperature, humidity);
+            if (Subject is WeatherData weatherData)
+            {
+                float temperature = weatherData.GetTemperature();
+                float humidity = weatherData.GetHumidity();
+                Display(temperature, humidity);
+            }
+            else
+            {
+                Console.WriteLine("无法获取天气数据");
+            }
         }
 
         public void Display(float temperature, float humidity)

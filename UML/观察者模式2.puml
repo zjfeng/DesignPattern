@@ -1,7 +1,13 @@
 @startuml 观察者模式
 title 观察者模式
 
-class WeatherData {
+interface ISubject {
+    + Register(observer: IObserver): void
+    + Remove(observer: IObserver): void
+    + Notify(): void
+}
+
+class WeatherData implements ISubject {
     - Observers: List<IObserver>
 
     + GetTemperature(): float
@@ -9,9 +15,6 @@ class WeatherData {
     + GetPressure(): float
 
     + MeasurementsChanged(): void
-    + Notify(): void
-    + Register(observer: IObserver): void
-    + Remove(observer: IObserver): void
 }
 
 interface IObserver {
@@ -19,23 +22,20 @@ interface IObserver {
 }
 
 class CurrentConditionsDisplay implements IObserver {
-    + WeatherData: WeatherData
+    + Subject: ISubject
     + Update(): void
 }
 
 class StatisticsDisplay implements IObserver {
-    + WeatherData: WeatherData
+    + Subject: ISubject
     + Update(): void
 }
 
 class ForecastDisplay implements IObserver {
-    + WeatherData: WeatherData
+    + Subject: ISubject
     + Update(): void
 }
 
-WeatherData ..> IObserver : has
-CurrentConditionsDisplay --> WeatherData : observes
-StatisticsDisplay --> WeatherData : observes
-ForecastDisplay --> WeatherData : observes
+ISubject "1" --> "*" IObserver : 注册
 
 @enduml

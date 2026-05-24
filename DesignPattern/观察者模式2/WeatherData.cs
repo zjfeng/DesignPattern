@@ -1,6 +1,6 @@
 namespace DesignPattern.观察者模式2
 {
-    public class WeatherData
+    public class WeatherData : ISubject
     {
         private List<IObserver> observers = new List<IObserver>();
 
