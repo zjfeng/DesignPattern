@@ -1,0 +1,75 @@
+@startuml 策略模式_Duck
+title 策略模式_Duck
+
+' === 鸭子 ===
+abstract class Duck {
+    - flayBehavior: IFlyBehavior
+    - quackBehavior: IQuackBehavior
+    - swimBehavior: ISwimBehavior
+    + {abstract} Display(): void
+    + SetFlyBehavior(flyBehavior: IFlyBehavior): void
+    + SetQuackBehavior(quackBehavior: IQuackBehavior): void
+    + SetSwimBehavior(swimBehavior: ISwimBehavior): void
+
+    + Swim(): void
+    + Fly(): void
+    + Quack(): void
+}
+
+class MallardDuck extends Duck {
+    
+}
+
+class RedheadDuck extends Duck {
+    
+}
+
+class RubberDuck extends Duck {
+    
+}
+
+' === 接口 ===
+interface IFlyBehavior {
+    + Fly(): void
+}
+
+interface IQuackBehavior {
+    + Quack(): void
+}
+
+interface ISwimBehavior {
+    + Swim(): void
+}
+
+' === 具体行为 ===
+class FlyWithWings implements IFlyBehavior {
+    + Fly(): void
+}
+
+class NoFly implements IFlyBehavior
+{
+    + Fly(): void
+}
+
+class Quack implements IQuackBehavior {
+    + Quack(): void
+}
+
+class NoQuack implements IQuackBehavior {
+    + Quack(): void
+}
+
+class SwimWithFeet implements ISwimBehavior {
+    + Swim(): void
+}
+
+class NoSwim implements ISwimBehavior {
+    + Swim(): void
+}
+
+' === 关系 ===
+Duck --> IFlyBehavior : has
+Duck --> IQuackBehavior : has
+Duck --> ISwimBehavior : has
+
+@enduml
