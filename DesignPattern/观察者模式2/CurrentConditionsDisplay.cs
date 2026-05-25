@@ -2,9 +2,9 @@ namespace DesignPattern.观察者模式2
 {
     public class CurrentConditionsDisplay : IObserver
     {
-        public ISubject Subject;
+        public ISubject<IObserver> Subject;
 
-        public CurrentConditionsDisplay(ISubject subject)
+        public CurrentConditionsDisplay(ISubject<IObserver> subject)
         {
             this.Subject = subject; 
             subject.Register(this);

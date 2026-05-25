@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace DesignPattern.观察者模式2
 {
-    public interface ISubject<TObserver>
+    public interface IWeatherObserver
     {
-        public void Register(TObserver observer);
-        public void Remove(TObserver observer);
-        public void Notify();
+        public void Update(float temperature, float humidity, float pressure);
     }
 }

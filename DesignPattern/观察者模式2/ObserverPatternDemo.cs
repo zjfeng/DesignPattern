@@ -18,6 +18,16 @@ namespace DesignPattern.观察者模式2
 
             weatherData.Remove(statisticsDisplay);
             weatherData.MeasurementsChanged();
+
+            Console.WriteLine("push");
+            CurrentDisplay currentDisplay = new CurrentDisplay();
+            weatherData.Register(currentDisplay);
+            weatherData.MeasurementsChanged();
+
+            Console.WriteLine("pull");
+            CurrentDisplay2 currentDisplay2 = new CurrentDisplay2();
+            weatherData.Register(currentDisplay2);
+            weatherData.MeasurementsChanged();
         }
     }
 }

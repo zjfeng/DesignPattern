@@ -36,6 +36,11 @@ class ForecastDisplay implements IObserver {
     + Update(): void
 }
 
-ISubject "1" --> "*" IObserver : 注册
+class HeatIndexDisplay implements IObserver {
+    + Subject: ISubject
+    + Update(): void
+}
+
+ISubject "1" ..> "*" IObserver : 注册
 
 @enduml

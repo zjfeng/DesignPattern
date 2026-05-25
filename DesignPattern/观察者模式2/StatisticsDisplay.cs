@@ -2,12 +2,12 @@ namespace DesignPattern.观察者模式2
 {
     public class StatisticsDisplay : IObserver
     {
-        public ISubject Subject;
+        public ISubject<IObserver> Subject;
         private List<float> temperatureReadings = new List<float>();
         private List<float> humidityReadings = new List<float>();
         private List<float> pressureReadings = new List<float>();
 
-        public StatisticsDisplay(ISubject subject)
+        public StatisticsDisplay(ISubject<IObserver> subject)
         {
             this.Subject = subject;
             subject.Register(this);
