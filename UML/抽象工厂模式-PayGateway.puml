@@ -1,0 +1,38 @@
+@startuml xx
+
+title 抽象工厂模式-PayGateway
+
+abstract class Client {}
+abstract class ParamsBuilder {}
+abstract class Handler {}
+abstract class CombinationFactory {
+    + CreateClient(): Client
+    + CreateParamsBuilder(): ParamsBuilder
+    + CreateHandler(): Handler
+}
+
+class AlipayClient extends Client {}
+class WeChatClient extends Client {}
+
+class AlipayParamsBuilder extends ParamsBuilder {}
+class WeChatParamsBuilder extends ParamsBuilder {}
+
+class AlipayRefundHandler extends Handler {}
+class WeChatRefundHandler extends Handler {}
+
+class AlipayCombinationFactory extends CombinationFactory {}
+class WechatCombinationFactory extends CombinationFactory {}
+
+CombinationFactory ..> Client
+CombinationFactory ..> ParamsBuilder
+CombinationFactory ..> Handler
+
+AlipayCombinationFactory ..> AlipayClient
+AlipayCombinationFactory ..> AlipayParamsBuilder
+AlipayCombinationFactory ..> AlipayRefundHandler
+
+WechatCombinationFactory ..> WeChatClient
+WechatCombinationFactory ..> WeChatParamsBuilder
+WechatCombinationFactory ..> WeChatRefundHandler
+
+@enduml

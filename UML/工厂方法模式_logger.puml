@@ -1,0 +1,27 @@
+@startuml xx
+
+title FactoryMethonPattern-Logger
+
+abstract class Logger{}
+
+class ConsoleLogger extends Logger{}
+
+class FileLogger extends Logger{}
+
+abstract class Formatter{}
+
+class SimpleFormatter extends Formatter {}
+
+class JsonFormatter extends Formatter {}
+
+abstract class CombinationFactory {
+    + CreateLogger(): Logger
+    + CreateFormatter(): Formatter
+}
+
+class CLSFCombinationFactory extends CombinationFactory {}
+
+CLSFCombinationFactory ..> ConsoleLogger
+CLSFCombinationFactory ..> SimpleFormatter
+
+@enduml
