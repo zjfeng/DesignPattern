@@ -1,0 +1,31 @@
+@startuml xx
+
+title 装饰器模式-Notifier
+
+interface INotifier {
+    + Send(message: string): void
+}
+
+class EmailNotifier extends INotifier {
+    + Send(message: string): void
+}
+
+abstract class Decorator implements INotifier {
+    - _notifier: INotifier
+    + {abstract} Send(message: string): void
+    + Decorator(notifier: INotifier)
+}
+
+class LoggingDecorator extends Decorator {
+    + Send(message: string): void
+}
+
+class EncryptionDecorator extends Decorator {
+    + Send(message: string): void
+}
+
+class RateLimitDecorator extends Decorator {
+    + Send(message: string): void
+}
+
+@enduml
