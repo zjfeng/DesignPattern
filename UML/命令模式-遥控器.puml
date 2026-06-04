@@ -1,0 +1,111 @@
+@startuml xx
+
+title CommandPattern-遥控器
+
+class Light {
+    + TurnOn(): void
+    + TurnOff(): void
+}
+
+class AirCondition {
+    + Temperature: int
+    + TurnOn(): void
+    + TurnOff(): void
+    + SetTemperature(temp: int): void
+}
+
+class Curtain {
+    + TurnOn(): void
+    + TurnOff(): void
+}
+
+class RemoteControl {
+    - _undoCommands: Stack<ICommand>
+    - _redoCommands: Stack<ICommand>
+    + PressButton(command: ICommand): void
+    + PressButton(command: ICommand, value: int): void
+    + Undo(): void
+    + Redo(): void
+}
+
+interface ICommand {
+    + Execute(): void
+    + Execute(value: int): void
+    + Undo(): void
+}
+
+class LightOnCommand implements ICommand {
+    - _light: Light
+    + LightOnCommand(light: Light)
+    + Execute(): void
+    + Execute(value: int): void
+    + Undo(): void
+}
+
+class LightOffCommand implements ICommand {
+    - _light: Light
+    + LightOffCommand(light: Light)
+    + Execute(): void
+    + Execute(value: int): void
+    + Undo(): void
+}
+
+class AirConditionOnCommand implements ICommand {
+    - _airCondition: AirCondition
+    + AirConditionOnCommand(airCondition: AirCondition)
+    + Execute(): void
+    + Execute(value: int): void
+    + Undo(): void
+}
+
+class AirConditionOffCommand implements ICommand {
+    - _airCondition: AirCondition
+    + AirConditionOffCommand(airCondition: AirCondition)
+    + Execute(): void
+    + Execute(value: int): void
+    + Undo(): void
+}
+
+class AirConditionSetTemperatureCommand implements ICommand {
+    - _airCondition: AirCondition
+    - _temperature: int
+    + AirConditionSetTemperatureCommand(airCondition: AirCondition, temperature: int)
+    + Execute(): void
+    + Execute(value: int): void
+    + Undo(): void
+}
+
+class CurtainOnCommand implements ICommand {
+    - _curtain: Curtain
+    + CurtainOnCommand(curtain: Curtain)
+    + Execute(): void
+    + Execute(value: int): void
+    + Undo(): void
+}
+
+class CurtainOffCommand implements ICommand {
+    - _curtain: Curtain
+    + CurtainOffCommand(curtain: Curtain)
+    + Execute(): void
+    + Execute(value: int): void
+    + Undo(): void
+}
+
+class MacroCommand implements ICommand {
+    - _commands: List<ICommand>
+    + MacroCommand(commands: List<ICommand>)
+    + Execute(): void
+    + Execute(value: int): void
+    + Undo(): void
+}
+
+LightOnCommand --> Light
+LightOffCommand --> Light
+AirConditionOnCommand --> AirCondition
+AirConditionOffCommand --> AirCondition
+AirConditionSetTemperatureCommand --> AirCondition
+CurtainOnCommand --> Curtain
+CurtainOffCommand --> Curtain
+RemoteControl --> ICommand
+
+@enduml

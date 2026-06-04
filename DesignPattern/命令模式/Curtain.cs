@@ -1,0 +1,21 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DesignPattern.命令模式
+{
+    internal class Curtain
+    {
+        public void TurnOn()
+        {
+            Console.WriteLine("Curtain is opened.");
+        }
+
+        public void TurnOff()
+        {
+            Console.WriteLine("Curtain is closed.");
+        }
+    }
+}
