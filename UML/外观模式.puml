@@ -1,0 +1,60 @@
+@startuml xx
+
+title Facade pattern
+
+class InventoryService {
+    + DeductStock(): void
+}
+
+class PaymentService {
+    + Charge(): void
+}
+
+class ShippingService {
+    + CreateShipment(): void
+}
+
+class NotificationService {
+    + SendOrderConfirmation(): void
+}
+
+class LoyaltyService {
+    + AddPoints(): void
+}
+
+class OrderFacade {
+    - _inventoryService: InventoryService
+    - _paymentService: PaymentService
+    - _shippingService: ShippingService
+    - _notificationService: NotificationService
+    - _loyaltyService: LoyaltyService
+    + OrderFacade(serviceFactory: IServiceFactory)
+    + PlaceOrder(): void
+}
+
+interface IServiceFactory {
+    + GetInventoryService(): InventoryService
+    + GetPaymentService(): PaymentService
+    + GetShippingService(): ShippingService
+    + GetNotificationService(): NotificationService
+    + GetLoyaltyService(): LoyaltyService
+}
+
+class ServiceFactory implements IServiceFactory {
+    + GetInventoryService(): InventoryService
+    + GetPaymentService(): PaymentService
+    + GetShippingService(): ShippingService
+    + GetNotificationService(): NotificationService
+    + GetLoyaltyService(): LoyaltyService
+}
+
+OrderFacade ..> IServiceFactory
+
+IServiceFactory ..> InventoryService
+IServiceFactory ..> PaymentService
+IServiceFactory ..> ShippingService
+IServiceFactory ..> NotificationService
+IServiceFactory ..> LoyaltyService
+
+
+@enduml

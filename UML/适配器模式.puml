@@ -1,0 +1,24 @@
+@startuml xx
+
+title Adapter pattern
+
+interface IPaymentProcessor {
+    + ProcessPayment(amount: decimal): bool
+}
+
+class StripeGateway {
+    + Charge(amount: decimal, currency: string): bool
+}
+
+class StripePaymentAdapter implements IPaymentProcessor {
+    - _stripeGateway: StripeGateway
+    - _currency: string
+    + StripePaymentAdapter(stripeGateway: StripeGateway)
+    + SetCurrency(currency: string): void
+    + ProcessPayment(amount: decimal): bool
+}
+
+StripePaymentAdapter --> StripeGateway
+
+@enduml
+

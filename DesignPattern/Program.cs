@@ -14,7 +14,8 @@
             //Base.Test.Run(new DesignPattern.工厂方法模式.Pizza店.FactoryMethodPatternDemo());
             //Base.Test.Run(new DesignPattern.工厂方法模式.Logger.FactoryMethodPatternDemo());
             //Base.Test.Run(new DesignPattern.装饰器模式.Notifier.DecoratorPatternDemo());
-            Base.Test.Run(new DesignPattern.命令模式.CommandPatternDemo());
+            //Base.Test.Run(new DesignPattern.命令模式.CommandPatternDemo());
+            Base.Test.Run(new DesignPattern.适配器模式.AdapterPatternDemo());
         }
     }
 }
