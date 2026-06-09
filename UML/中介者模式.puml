@@ -1,0 +1,20 @@
+@startuml xx
+
+title Mediator pattern
+
+class ChatRoom {
+    - _users: List<User>
+    + SignIn(user: User)
+    + SignOut(user: User)
+    + SendMessage(message: String, user: User)
+}
+
+class User {
+    + Name: String
+    + User(name: String)
+    + ReceiveMessage(message: String, user: User)
+}
+
+ChatRoom "1" o-- "n" User : has
+
+@enduml

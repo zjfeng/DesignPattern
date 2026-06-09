@@ -1,0 +1,43 @@
+@startuml xx
+
+title Mediator Pattern
+
+class TempSensor extends Instrument{
+    - _mediator: Mediator
+    + TempSensor(mediator: Mediator)
+    + GetTemperature(): void
+}
+
+class AC extends Instrument {
+    + SetCold();
+    + SetHot();
+    + TurnOn()
+    + TurnOff()
+}
+
+class Window extends Instrument {
+    + TurnOn()
+    + TurnOff()
+}
+
+class Light extends Instrument {
+    + TurnOn()
+    + TurnOff()
+}
+
+abstract class Instrument {
+    + TurnOn()
+    + TurnOff()
+}
+
+class SmokeDetector extends Instrument {
+    - _mediator: Mediator
+    + SmokeDetector(mediator: Mediator)
+    + IsSmokeDetected(): bool
+}
+
+class Mediator {
+    + Notify(sender: Instrument, eventObj: object)
+}
+
+@enduml
