@@ -1,0 +1,23 @@
+@startuml xx
+
+title Proxy Pattern
+
+interface IImage {
+    + Display(): void
+}
+
+class HeavyImage {
+    + Path: string
+    + HeavyImage(path: string)
+    + Display(): void
+}
+
+class ImageProxy implements IImage {
+    - _heavyImage: HeavyImage
+    + ImageProxy(path: string)
+    + Display(): void
+}
+
+ImageProxy --> HeavyImage
+
+@enduml

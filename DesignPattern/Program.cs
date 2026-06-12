@@ -16,7 +16,8 @@
             //Base.Test.Run(new DesignPattern.装饰器模式.Notifier.DecoratorPatternDemo());
             //Base.Test.Run(new DesignPattern.命令模式.CommandPatternDemo());
             //Base.Test.Run(new DesignPattern.适配器模式.AdapterPatternDemo());
-            Base.Test.Run(new DesignPattern.中介者模式.MediatorPatternDemo());
+            //Base.Test.Run(new DesignPattern.中介者模式.MediatorPatternDemo());
+            Base.Test.Run(new DesignPattern.代理模式.ProxyPatternDemo());
         }
     }
 }
