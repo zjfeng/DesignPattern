@@ -1,0 +1,40 @@
+@startuml xx
+
+title Builder Pattern
+
+class EmailMessage {
+    - _to: string
+    - _subject: string
+    - _cc: string
+    - _bcc: string
+    - _body: string
+    - _isHtml: bool
+    - _priority: string
+    - _attachments: List<string>
+
+    + EmailMessage(to: string, subject: string, cc: string, bcc: string, body: string, isHtml: bool, priority: string, attachments: List<string>)
+}
+
+class Builder {
+    + To: string
+    + Subject: string
+    + Cc: string
+    + Bcc: string
+    + Body: string
+    + IsHtml: bool
+    + Priority: string
+    + Attachments: List<string>
+
+    + Build(): EmailMessage
+}
+
+class Director {
+    - _builder: Builder
+    - _to: string
+    - _subject: bool
+    + Director(to: string, subject: string)
+    + BuildEmail()
+}
+
+@enduml
+
