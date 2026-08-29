@@ -1,0 +1,22 @@
+@startuml xx
+
+title chain-of-responsibility-pattern
+
+interface IApprover {
+    + Approve(amount: decimal): void
+    + SetNext(approver: IApprover): IApprover
+}
+
+class Manager implements IApprover {
+    - _next: IApprover
+    + Approve(amount: decimal): void
+    + SetNext(approver: IApprover): IApprover
+}
+
+class Director implements IApprover {
+    - _next: IApprover
+    + Approve(amount: decimal): void
+    + SetNext(approver: IApprover): IApprover
+}
+
+@enduml

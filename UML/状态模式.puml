@@ -1,0 +1,41 @@
+@startuml xx
+
+title State pattern
+
+interface IDocumentState {
+    + Public(): void
+    + Edit(content: string): string
+    + Delete(): void
+}
+
+class DraftState implements IDocumentState {
+    + Public(): void
+    + Edit(content: string): void
+    + Delete(): void
+}
+
+class ModerationState implements IDocumentState {
+    + Public(): void
+    + Edit(content: string): void
+    + Delete(): void
+}
+
+class PublishedState implements IDocumentState {
+    + Public(): void
+    + Edit(content: string): void
+    + Delete(): void
+}
+
+class Document {
+    + Content: string
+    + Show(): void
+    + ChangeState(): void
+    + SetContent(): void
+    - _documentState: IDocumentState
+    + Public(): void
+    + Edit(content: string): void
+    + Delete(): void
+}
+
+
+@enduml

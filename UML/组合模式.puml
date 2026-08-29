@@ -1,0 +1,25 @@
+@startuml xx
+
+title combination pattern
+
+interface IUnit {
+    + GetTotalSalary(): decimal
+}
+
+class Soldier implements IUnit {
+    + GetTotalSalary(): decimal
+    + Name: string
+    + Salary: decimal
+    + Soldier(name: string, salary: decimal)
+}
+
+class Squad implements IUnit {
+    + GetTotalSalary(): decimal
+    + Name: string
+    + Soldiers: List<Soldier>
+    + Squad(name: string, soldiers: List<Soldier>)
+}
+
+Squad *--> Soldier
+
+@enduml
